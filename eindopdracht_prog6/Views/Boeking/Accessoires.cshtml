@@ -1,0 +1,87 @@
+﻿@model BeestjeOpJeFeestje.ASP.Models.AccessoiresSelectViewModel
+
+@{
+    ViewData["Title"] = "Accessoires";
+
+}
+<div class="progress mb-4" role="progressbar" aria-label="Example with label" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar" style="width: 33%"></div>
+</div>
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card">
+            <div class="card-header">
+                Stap 2 - Kies je accessoires
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    <div class="row">
+                        @foreach (var accessory in Model.AvailableAccessoires)
+                        {
+                            <div class="col-md-2 mb-3">
+                                <label for="selectedAccessoires_@accessory.Id" class="card text-center" style="cursor: pointer;">
+                                    <div class="card-header">
+                                        @accessory.Name<br />
+                                        <input type="checkbox" name="SelectedAccessoiresIds" value="@accessory.Id" id="selectedAccessoires_@accessory.Id" />
+                                    </div>
+                                    <div class="card-body">
+                                        &dollar;@accessory.Price
+                                    </div>
+                                </label>
+                            </div>
+                        }
+                    </div>
+                    @if (string.IsNullOrEmpty(Model.BookingStatus.User.Email))
+                    {
+                        <input class="btn btn-primary" type="submit" value="Ga naar stap 3" />
+                    }
+                    else
+                    {
+                        <input class="btn btn-primary" type="submit" value="Ga naar stap 4" />
+                    }
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-header">
+                Boeking
+            </div>
+            <div class="card-body">
+                <p>Datum: @Model.BookingStatus.BookingDate</p>
+                <hr />
+                <p>Beestjes</p>
+                @if (Model.BookingStatus.Animals != null)
+                {
+                    @foreach (var animal in Model.BookingStatus.Animals)
+                    {
+                        <img src="~/img/@animal.Image" style="height: 70px" alt="@animal.Image" />
+                    }
+                }
+                else
+                {
+                    <p>Geen gekozen beestjes</p>
+                }
+                <hr />
+                <p>Accessoires</p>
+                @if (Model.BookingStatus.Accessories != null)
+                {
+                    <ul>
+                        @foreach (var accessory in Model.BookingStatus.Accessories)
+                        {
+                            <li>@accessory.Name</li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p>Geen gekozen beestjes</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>

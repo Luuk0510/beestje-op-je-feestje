@@ -1,0 +1,96 @@
+﻿@model BeestjeOpJeFeestje.ASP.Models.AnimalSelectViewModel
+
+@{
+    ViewData["Title"] = "Beestje kiezen";
+}
+
+<div class="progress mb-4" role="progressbar" aria-label="Example with label" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar" style="width: 0%"></div>
+</div>
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger" role="alert">
+        @foreach (var error in ViewData.ModelState["SelectedAnimalIds"].Errors)
+        {
+            <p>@error.ErrorMessage</p>
+        }
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card">
+            <div class="card-header">
+                Stap 1 - Kies je beestjes
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    <div class="row">
+                        @foreach (var animal in Model.AvailableAnimals)
+                        {
+                            <div class="col-md-2 mb-3">
+                                <label for="selectedAnimals_@animal.Id" class="card text-center" style="cursor: pointer;">
+                                    <div class="card-header">
+                                        @animal.Name<br />@animal.Type<br />
+                                        <input type="checkbox" name="SelectedAnimalIds" value="@animal.Id" id="selectedAnimals_@animal.Id" />
+                                    </div>
+                                    <div class="card-body">
+                                        <p class="card-text"><img src="~/img/@animal.Image" style="height: 120px" alt="@animal.Image" /><br />&dollar;@animal.Price</p>
+                                    </div>
+                                </label>
+                            </div>
+                        }
+                    </div>
+                    <input type="hidden" asp-for="BookingDate" value="@Model.BookingStatus.BookingDate" />
+                    <input type="hidden" asp-for="LoggedInUserEmail" value="@Model.LoggedInUserEmail" />
+                    <input class="btn btn-primary" type="submit" value="Ga naar stap 2" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-header">
+                Boeking
+            </div>
+            <div class="card-body">
+                <p>Datum: @Model.BookingStatus.BookingDate</p>
+                <hr />
+                <p>Beestjes</p>
+                @if(Model.BookingStatus.Animals != null)
+                {
+                    @foreach (var animal in Model.BookingStatus.Animals)
+                    {
+                        <img src="~/img/@animal.Image" style="height: 70px" alt="@animal.Image" />
+                    }
+                }
+                else
+                {
+                    <p>Geen gekozen beestjes</p>
+                }
+                <hr />
+                <p>Accessoires</p>
+                @if (Model.BookingStatus.Accessories != null)
+                {
+                    <ul>
+                        @foreach (var accessory in Model.BookingStatus.Accessories)
+                        {
+                            <li>@accessory.Name</li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p>Geen gekozen beestjes</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

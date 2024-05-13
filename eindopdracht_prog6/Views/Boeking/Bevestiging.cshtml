@@ -1,0 +1,95 @@
+﻿@model BeestjeOpJeFeestje.ASP.Models.BevestigingViewModel
+
+@{
+    ViewData["Title"] = "Gegevens invoeren";
+    string middlename = "";
+    if (!string.IsNullOrEmpty(Model.BookingStatus.User.MiddelName))
+    {
+        middlename = Model.BookingStatus.User.MiddelName + " ";
+    }
+    string fullname = Model.BookingStatus.User.FirstName + " " + middlename + Model.BookingStatus.User.Surname;
+}
+    <div class="progress mb-4" role="progressbar" aria-label="Example with label" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar" style="width: 100%"></div>
+    </div>
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card">
+            <div class="card-header">
+                Stap 4 - Controleer je gegevens
+            </div>
+            <div class="card-body">
+                <div class="mb-4">
+                    <h2>Contact gegevens: </h2>
+                    <p>@fullname</p>
+                    <p>@Model.BookingStatus.User.Address</p>
+                    <p>@Model.BookingStatus.User.Email</p>
+                </div>
+                <div class="mb-4">
+                    <h2>Prijs / Korting</h2>
+                    <ul>
+                        @foreach (var animal in Model.BookingStatus.Animals)
+                        {
+                            <li>@animal.Name: @animal.Price &dollar;</li>
+                        }
+                        @foreach (var accessory in Model.BookingStatus.Accessories)
+                        {
+                            <li>@accessory.Name: @accessory.Price &dollar;</li>
+                        }
+                        @foreach (var discound in Model.Discounts)
+                        {
+                            <li>@discound.Name: @discound.Discounts &percnt;</li>
+                        }
+                    </ul>
+                    <h4>Totaal: &dollar; @Model.TotalPrice</h4>
+                </div>
+                <form method="post">
+                    <input type="hidden" asp-for="TotalPrice" value="@Model.TotalPrice"/>
+                    <input class="btn btn-primary" type="submit" value="Boeking bevestigen" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-header">
+                Boeking
+            </div>
+            <div class="card-body">
+                <p>Datum: @Model.BookingStatus.BookingDate</p>
+                <hr />
+                <p>Beestjes</p>
+                @if (Model.BookingStatus.Animals != null)
+                {
+                    @foreach (var animal in Model.BookingStatus.Animals)
+                    {
+                        <img src="~/img/@animal.Image" style="height: 70px" alt="@animal.Image" />
+                    }
+                }
+                else
+                {
+                    <p>Geen gekozen beestjes</p>
+                }
+                <hr />
+                <p>Accessoires</p>
+                @if (Model.BookingStatus.Accessories != null)
+                {
+                    <ul>
+                        @foreach (var accessory in Model.BookingStatus.Accessories)
+                        {
+                            <li>@accessory.Name</li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p>Geen gekozen beestjes</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
