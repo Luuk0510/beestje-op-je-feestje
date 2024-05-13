@@ -22,3 +22,9 @@ Eigenaren van de boerderij kunnen dieren beheren, en klanten kunnen deze boeken 
 - Database: Microsoft SQL voor opslag van diergegevens en boekingsinformatie.
 - Framework: ASP.NET Core MVC.
 - Unit Testen: Beschikbaar voor alle validatieregels en kortingsregels.
+
+## Screenshots
+![afbeelding](https://github.com/Luuk0510/beestje-op-je-feestje/assets/54103279/b5f3efc2-ea9d-46da-af24-42b923b47661)
+![afbeelding](https://github.com/Luuk0510/beestje-op-je-feestje/assets/54103279/3e7c9aaf-ec8a-450d-af6b-490c28ea020e)
+![afbeelding](https://github.com/Luuk0510/beestje-op-je-feestje/assets/54103279/4296286b-dd8e-4001-a6a2-32a25b19d5b4)
+![afbeelding](https://github.com/Luuk0510/beestje-op-je-feestje/assets/54103279/7730db2a-7db6-406b-81f2-974407121b6f)
