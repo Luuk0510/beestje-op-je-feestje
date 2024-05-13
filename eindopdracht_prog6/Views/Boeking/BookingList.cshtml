@@ -1,0 +1,47 @@
+﻿@model IEnumerable<BeestjeOpJeFeestje.Domain.Booking>
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<h1>Uw boekingen</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Datum
+            </th>
+            <th>
+                Totaalprijs
+            </th>
+            <th>
+                dieren
+            </th>
+            <th>
+
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                    @item.Date.ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalPrice)
+            </td>
+            <td>
+                @foreach (var animal in item.Animals)
+                {
+                    @Html.DisplayFor(modelItem => animal.Name)
+                }
+            </td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@item.Id">verwijderen</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

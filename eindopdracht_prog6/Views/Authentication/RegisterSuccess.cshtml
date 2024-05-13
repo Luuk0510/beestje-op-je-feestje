@@ -1,0 +1,27 @@
+﻿@model BeestjeOpJeFeestje.ASP.Models.LoginViewModel;
+
+@{
+    ViewData["Title"] = "Register Succesvol";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">
+                    <h1>Account was succesvol aangemaakt</h1>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-text">De account is succesvol aangemaakt. Hieronder vind je de inloggegevens.</h5>
+                    <div class="alert alert-success" role="alert">
+                        <strong>Email:</strong> @Model.Email <br>
+                        <strong>Wachtwoord:</strong> @Model.Password
+                    </div>
+                    <div class="text-center">
+                        <a class="btn btn-primary" asp-controller="Boeking" asp-action="Index">Terug naar Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

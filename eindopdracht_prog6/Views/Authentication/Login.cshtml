@@ -1,0 +1,29 @@
+﻿@model BeestjeOpJeFeestje.ASP.Models.LoginViewModel;
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="container p-5">
+    <h1 class="text-center">Login</h1>
+    <div class="mobile row">
+        <div class="col-md-12 d-flex align-items-center justify-content-center">
+            <form method="post">
+                <input type="hidden" asp-for="Booking" />
+                <div class="form-group mb-4">
+                    <label class="form-label">Email</label>
+                    <input type="text" class="form-control form-control-lg" asp-for="Email" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-4">
+                    <label class="form-label">Wachtwoord</label>
+                    <input type="password" class="form-control form-control-lg" asp-for="Password" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="mb-4 d-flex justify-content-center">
+                    <input type="submit" class="btn btn-primary" value="Inloggen" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

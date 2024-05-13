@@ -1,0 +1,77 @@
+﻿@model BeestjeOpJeFeestje.ASP.Models.RegisterFormViewModel;
+
+@{
+    ViewData["Title"] = "Register gebruiker";
+}
+
+<h1 class="text-center">Maak een nieuwe gebruiker aan</h1>
+<hr />
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form method="post">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Voornaam</label>
+                            <input type="text" class="form-control" asp-for="FirstName">
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Tussenvoegsel</label>
+                            <input type="text" class="form-control" asp-for="MiddelName">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Achternaam</label>
+                            <input type="text" class="form-control" asp-for="Surname">
+                            <span asp-validation-for="Surname" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Adres</label>
+                            <input type="text" class="form-control" asp-for="Address">
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" asp-for="Email">
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Telefoonnummer</label>
+                            <input asp-for="PhoneNumber" class="form-control">
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Klanten kaart</label>
+                            <select class="form-control" asp-for="SelectedCustomerCardType">
+                                <option value="" selected>Geen</option>
+                                @foreach (var cardType in Model.CustomerCardTypes)
+                                {
+                                    <option value="@cardType.Type">@cardType.Type</option>
+                                }
+                            </select>
+                            <span asp-validation-for="SelectedCustomerCardType" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Permissies</label>
+                            <select class="form-control" asp-for="SelectedUserRole">
+                                @foreach (var userRole in Model.UserRoles)
+                                {
+                                    <option value="@userRole.Name" asp-for="UserRoles">@userRole.Name</option>
+                                }
+                            </select>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <input class="btn btn-primary" type="submit" value="Aanmaken" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

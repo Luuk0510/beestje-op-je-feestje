@@ -1,0 +1,105 @@
+﻿@model BeestjeOpJeFeestje.ASP.Models.ContactInformationViewModel;
+
+
+@{
+    ViewData["Title"] = "Gegevens invoeren";
+}
+
+<div class="progress mb-4" role="progressbar" aria-label="Example with label" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar" style="width: 66%"></div>
+</div>
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="card">
+            <div class="card-header">
+                Stap 3 - Vul je contactgegevens in
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <form method="post">
+                            <div class="mb-3">
+                                <label class="form-label">Voornaam</label>
+                                <input asp-for="FirstName" class="form-control">
+                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Tussenvoegsel</label>
+                                <input asp-for="MiddelName" class="form-control">
+                                <span asp-validation-for="MiddelName" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Achternaam</label>
+                                <input asp-for="Surname" class="form-control">
+                                <span asp-validation-for="Surname" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Adres</label>
+                                <input asp-for="Address" class="form-control">
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Email</label>
+                                <input asp-for="Email" class="form-control">
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <input class="btn btn-primary" type="submit" value="Ga naar stap 4" />
+                        </form>
+                    </div>
+
+                    <div class="col-md-8 d-flex flex-column align-items-center p-5">
+                        <form asp-controller="Authentication" asp-action="Login" method="get">
+                            <input type="hidden" name="Booking" value="true" />
+                            <h2>Heb je een account?</h2>
+                            <div class="text-center">
+                                <input class="btn btn-primary" type="submit" value="Inloggen" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-header">
+                Boeking
+            </div>
+            <div class="card-body">
+                <p>Datum: @Model.BookingStatus.BookingDate</p>
+                <hr />
+                <p>Beestjes</p>
+                @if (Model.BookingStatus.Animals != null)
+                {
+                    @foreach (var animal in Model.BookingStatus.Animals)
+                    {
+                        <img src="~/img/@animal.Image" style="height: 70px" alt="@animal.Image" />
+                    }
+                }
+                else
+                {
+                    <p>Geen gekozen beestjes</p>
+                }
+                <hr />
+                <p>Accessoires</p>
+                @if (Model.BookingStatus.Accessories != null)
+                {
+                    <ul>
+                        @foreach (var accessory in Model.BookingStatus.Accessories)
+                        {
+                            <li>@accessory.Name</li>
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <p>Geen gekozen beestjes</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
